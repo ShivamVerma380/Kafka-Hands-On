@@ -30,6 +30,11 @@ public class WikimediaChangesProducer {
         props.put(ProducerConfig.ACKS_CONFIG, "all");
         props.put(ProducerConfig.RETRIES_CONFIG, Integer.MAX_VALUE);
 
+        // set high throughput producer
+        props.put(ProducerConfig.LINGER_MS_CONFIG, 20);
+        props.put(ProducerConfig.BATCH_SIZE_CONFIG, 32 * 1024);
+        props.put(ProducerConfig.COMPRESSION_TYPE_CONFIG, "snappy");
+
         // Create the producer
         KafkaProducer<String, String> producer = new KafkaProducer<>(props);
 
